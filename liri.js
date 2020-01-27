@@ -18,12 +18,18 @@ function spotifyCall(songname){
           return console.log("Could not find song with this name.");
         }
        
-      console.log(data);
       //for loop to loop through items array.. if search has no value will return error message//
       if(data.tracks.items.length != 0){
       for(i = 0; i <data.tracks.items.length; i++){
-          console.log(data.tracks.items[i].artists[0].name);
-          console.log(data.tracks.items[i].name);
+          //song name//
+          console.log("Song Name: " + data.tracks.items[i].name);
+          //artist name//
+          console.log("Artist Name: " + data.tracks.items[i].artists[0].name);
+          // preview link//
+          console.log("Preview Link: " + data.tracks.items[i].preview_url);
+          //album name//
+          console.log("Album Name: " + data.tracks.items[i].album.name);
+          // console.log(data.tracks.items[i].artists);
       }
     }else{
         console.log("no results for your queuery")
@@ -43,5 +49,5 @@ if(arg1 === "spotify-this"){
     process.exit(1);
 }
 }
-// will take multiple strings join and make a sentence
+// will take 2 arguments: command and search parameters
 start(process.argv[2], process.argv.slice(3).join(" "))
