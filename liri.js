@@ -5,15 +5,20 @@ var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var moment = require("moment");
 moment().format()
-// var fs = require('fs');
+var fs = require('fs');
 
+// function read(){
 // fs.readFile("random.txt", "utf8", function(error, data) {
-//     if(error) {
-//         return console.log(error);
-//     }
-//     console.log(data);
-// });
 
+//     if (error) {
+//     console.log(error);
+//     }
+  
+//     console.log(data);
+  
+//   });
+
+// }read();
 
 function bands(bandname){
     axios.get(`https://rest.bandsintown.com/artists/${bandname}/events?app_id=codingbootcamp`)
@@ -27,7 +32,7 @@ function bands(bandname){
             //venue name//
             console.log("Venue Name: " + res.data[i].venue.name);
             //venue city//
-            console.log("Venue Location: " + res.data[i].venue.city);
+            console.log("Venue Location: " + res.data[i].venue.city + " " + res.data[i].venue.region);
             //event time.. have to figure out how to convert with moment//
             // let date = res.data[i].datetime;
             console.log("Event Date: " + moment(res.data[i].datetime).format("MM/DD/YYYY"));
@@ -83,7 +88,13 @@ function bands(bandname){
 //     }
 //       });
 // }
+const spotifyCall = async(str) => {
+    const data = await spotify.search({type: 'track', query: str})
+    let artist = (data.tracks.items[0].artists[0].name);
+    console.log(artist);
+}
   
+
 //remember will have to use process.argv
 function start(arg1, arg2){
 console.log(arg1, arg2);
@@ -93,7 +104,9 @@ if(arg1 === "spotify-this"){
     movieInfo(arg2)
 }else if(arg1 === "concert-this"){
     bands(arg2);
-}else{
+}else if(arg1 === "do-what-it-says"){
+
+} else{
     console.log("Try again bruh");
     process.exit(1);
 }
