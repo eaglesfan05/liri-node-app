@@ -4,29 +4,49 @@ var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 
-//API call to ombd api//
-function movieInfo(moviename){
-    axios.get(`https://www.omdbapi.com/?t=${moviename}&apikey=trilogy`)
-  .then(function(res) {
-    // console.log(res.data);
-    //Title//
-    console.log("Movie Title: " + res.data.Title);
-    //Year//
-    console.log("Year Released: " + res.data.Year);
-    //imdb rating//
-    console.log("IMDB Rating: " + res.data.imdbRating);
-    //rotten tomatoes rating//
-    console.log("Rotten Tomatoes Rating: " + res.data.Ratings[1].Value);
-    //language//
-    console.log("Language: " + res.data.Language);
-    //Production Company//
-    console.log("Produced By: " + res.data.Production);
-    //plot//
-    console.log("Movie Plot: " + res.data.Plot);
-    //actors//
-    console.log("Actors: " + res.data.Actors);
-  })
+function bands(bandname){
+    axios.get(`https://rest.bandsintown.com/artists/${bandname}/events?app_id=codingbootcamp`)
+    .catch(err =>{
+        console.log("wrong");
+        process.exit(1);
+    }).then(res => {
+        //loop through artist events//
+        for(i = 0; i<res.data.length; i++){
+            console.log(res.data);
+            //venue name//
+            console.log("Venue Name: " + res.data[i].venue.name);
+            //venue city//
+            console.log("Venue Location: " + res.data[i].venue.city);
+            //event time.. have to figure out how to convert with moment//
+            let date = res.data[i].datetime;
+            console.log("Event Time: " + date);
+        }
+        
+    })
 }
+// //API call to ombd api//
+// function movieInfo(moviename){
+//     axios.get(`https://www.omdbapi.com/?t=${moviename}&apikey=trilogy`)
+//   .then(function(res) {
+//     // console.log(res.data);
+//     //Title//
+//     console.log("Movie Title: " + res.data.Title);
+//     //Year//
+//     console.log("Year Released: " + res.data.Year);
+//     //imdb rating//
+//     console.log("IMDB Rating: " + res.data.imdbRating);
+//     //rotten tomatoes rating//
+//     console.log("Rotten Tomatoes Rating: " + res.data.Ratings[1].Value);
+//     //language//
+//     console.log("Language: " + res.data.Language);
+//     //Production Company//
+//     console.log("Produced By: " + res.data.Production);
+//     //plot//
+//     console.log("Movie Plot: " + res.data.Plot);
+//     //actors//
+//     console.log("Actors: " + res.data.Actors);
+//   })
+// }
 
 // function spotifyCall(songname){
 //     spotify.search({ type: 'track', query: songname }, function(err, data) {
@@ -60,6 +80,8 @@ if(arg1 === "spotify-this"){
     spotifyCall(arg2)
 }else if(arg1 === "movie-this"){
     movieInfo(arg2)
+}else if(arg1 === "concert-this"){
+    bands(arg2);
 }else{
     console.log("Try again bruh");
     process.exit(1);
