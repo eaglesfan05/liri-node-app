@@ -3,6 +3,17 @@ dotenv = require("dotenv").config();
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
+var moment = require("moment");
+moment().format()
+// var fs = require('fs');
+
+// fs.readFile("random.txt", "utf8", function(error, data) {
+//     if(error) {
+//         return console.log(error);
+//     }
+//     console.log(data);
+// });
+
 
 function bands(bandname){
     axios.get(`https://rest.bandsintown.com/artists/${bandname}/events?app_id=codingbootcamp`)
@@ -12,14 +23,14 @@ function bands(bandname){
     }).then(res => {
         //loop through artist events//
         for(i = 0; i<res.data.length; i++){
-            console.log(res.data);
+            console.log(res.data[i]);
             //venue name//
             console.log("Venue Name: " + res.data[i].venue.name);
             //venue city//
             console.log("Venue Location: " + res.data[i].venue.city);
             //event time.. have to figure out how to convert with moment//
-            let date = res.data[i].datetime;
-            console.log("Event Time: " + date);
+            // let date = res.data[i].datetime;
+            console.log("Event Date: " + moment(res.data[i].datetime).format("MM/DD/YYYY"));
         }
         
     })
