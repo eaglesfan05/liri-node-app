@@ -14,3 +14,12 @@ The app is broken down made up of 5 functions.
     2. To get a response from the Spotify API: from the command line enter "node liri.js song-this <song name here>" press enter and what is returned is the song name, artist name, a preview link and the album.
     3. To get a resonse from the Bands In Town API: from the command line enter "node liri.js concert-this <band name here>" press enter and what is returned is a list of venues that artist will play, the location and the date.
     4. To get a response from the OMDB API: from the command line enter "node liri.js movie-this<movie name here> press enter and what is returned is the movies' title, year released, imdb rating, Rotten Tomatoes rating, movie language, production company, plot description, and cast.
+
+## do-what-it-says demo
+![](assets/images/Screenshot%20(11).png)
+## spotify-this demo
+![](assets/images/Screenshot%20(8).png)
+## concert-this demo
+![](assets/images/Screenshot%20(10).png)
+## movie-this demo
+![](assets/images/Screenshot%20(9).png)
