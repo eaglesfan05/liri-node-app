@@ -45,6 +45,9 @@ function bands(bandname){
 }
 //API call to ombd api//
 function movieInfo(moviename){
+    if(!moviename){
+        moviename = "Mr. Nobody";
+    }
     axios.get(`https://www.omdbapi.com/?t=${moviename}&apikey=trilogy`)
   .then(res =>{
          // console.log(res.data);
@@ -71,6 +74,9 @@ function movieInfo(moviename){
 }
 
 function spotifyCall(songname){
+    if(!songname){
+        songname = "The Sign";
+    }
     spotify.search({ type: 'track', query: songname }, function(err, data) {
         if (err) {
           return console.log("Could not find song with this name.");
