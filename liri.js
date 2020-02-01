@@ -13,9 +13,9 @@ function read(){
         if (error) {
         console.log(error);
         }
-        let thisshit = data.split(",")
-        console.log(thisshit);
-        start(thisshit[0], JSON.parse(thisshit[1]));
+        let whatsReturned = data.split(",")
+        console.log(whatsReturned);
+        start(whatsReturned[0], JSON.parse(whatsReturned[1]));
       });
     
 }
